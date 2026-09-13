@@ -1,0 +1,230 @@
+/* Aurum clone - base: tokens, fonts, reset, chrome (nav, footer, drawers). */
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/assets/fonts/inter-var.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('/assets/fonts/inter-var-cyr.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/assets/fonts/instrumentserif-normal-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/assets/fonts/instrumentserif-italic-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Bodoni Moda';
+  src: url('/assets/fonts/bodonimoda-normal-400-900.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ink: #1c1c1c;
+  --ink-dim: #787878;
+  --ink-faint: #999;
+  --paper: #fff;
+  --card: #fbfbf7;
+  --line: #e3e3e0;
+  --pill-line: #ccc;
+  --card-hover: #f2f2ef;      /* фон hover/selected карточек и пилюль */
+  --ink-contrast: #fff;       /* текст на заливке var(--ink) */
+  --on-ink-dim: rgba(255, 255, 255, .72);   /* приглушённый текст на заливке ink */
+  --radius-card: 20px;
+  --radius-hero: 40px;
+  --ease-io: cubic-bezier(.44, 0, .56, 1);
+  --ease-out: cubic-bezier(.76, .03, .23, 1);
+  --ease-soft: cubic-bezier(.64, .01, .38, 1.01);
+  --nav-h: 80px;
+}
+
+/* Тёмная тема всего сайта: переключается тумблером в шапке (data-theme на
+   html, помнится в localStorage). Белые тексты на фото-оверлеях остаются
+   белыми в обеих темах — это контент, не хром. */
+html[data-theme="dark"] {
+  --ink: #ecedef;
+  --ink-dim: #9a9ba0;
+  --ink-faint: #67686e;
+  --paper: #131417;
+  --card: #1c1d21;
+  --line: #2b2c31;
+  --pill-line: #43444a;
+  --card-hover: #26272c;
+  --ink-contrast: #131417;
+  --on-ink-dim: rgba(19, 20, 23, .62);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Inter', 'Inter Placeholder', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; letter-spacing: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+input { font: inherit; letter-spacing: inherit; color: inherit; }
+main { position: relative; z-index: 2; }
+
+/* type scale */
+.label { font-size: 16px; line-height: 1.6; letter-spacing: -0.02em; text-transform: uppercase; font-weight: 400; }
+.label-sm { font-size: 14px; line-height: 1.6; letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink-dim); }
+h1, h2, h3, h4 { font-weight: 400; }
+
+/* ---------- wordmark ---------- */
+.wordmark { display: block; }
+.wordmark { color: var(--ink); }
+.wordmark text { fill: var(--ink); stroke: currentColor; stroke-width: 2.4; paint-order: stroke; color: var(--ink); }
+.site-nav .wordmark, .hero-wordmark .wordmark { color: #fff; }
+.site-nav .wordmark text, .hero-wordmark .wordmark text { color: #fff; fill: #fff; }
+.wm-u { font-family: 'Instrument Serif', Georgia, serif; }
+.wm-i { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; }
+.wordmark-small { width: 144px; height: 52px; }
+.wordmark-footer { width: min(74vw, 1160px); height: auto; }
+
+/* ---------- navigation ----------
+   The whole fixed header is white and blended with `difference`:
+   over the white page it renders black, over photos it inverts them. */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+  height: var(--nav-h);
+  mix-blend-mode: difference;
+  transition: background .3s var(--ease-io);
+}
+/* past the hero the bar gets solid ground: page text used to slide under the
+   transparent header and collide with the wordmark. difference has to go with
+   it — blending a filled bar would paint the whole strip black. */
+body.nav-solid .site-nav { mix-blend-mode: normal; background: var(--paper); }
+body.nav-solid .nav-inner { color: var(--ink); }
+body.nav-solid .site-nav .wordmark,
+body.nav-solid .site-nav .wordmark text { color: var(--ink); fill: var(--ink); }
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 100%; padding: 20px 40px; position: relative;
+  color: #fff;
+}
+.site-nav .wordmark text { fill: #fff; }
+.nav-left { display: flex; gap: 20px; }
+.nav-left a, .nav-right a, .nav-cart, .nav-burger {
+  font-size: 14px; line-height: 1.1; letter-spacing: -0.02em;
+  transition: color .25s var(--ease-io);
+}
+.nav-left a:hover, .nav-right a:hover, .nav-cart:hover { color: #878787; }
+.nav-logo {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+}
+.nav-right { display: flex; align-items: center; gap: 20px; }
+/* the cart is an icon with a count badge; search lives on its own page */
+.nav-cart { display: inline-flex; align-items: flex-start; position: relative; }
+.nav-cart svg { display: block; }
+.cart-count {
+  font-size: 11px; line-height: 1; padding: 2px 4px; margin: -4px 0 0 -4px;
+  background: var(--ink); color: var(--ink-contrast); border-radius: 100px; min-width: 15px; text-align: center;
+}
+.nav-burger { display: none; }
+
+/* mobile menu overlay */
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 60; background: var(--paper);
+  display: flex; flex-direction: column; padding: 20px;
+  opacity: 0; pointer-events: none; transition: opacity .35s var(--ease-io);
+}
+.mobile-menu.open { opacity: 1; pointer-events: auto; }
+.mobile-menu[hidden] { display: none; }
+.mobile-menu-top { display: flex; justify-content: flex-end; }
+/* the only way out of a full-screen overlay: the label alone was a 22x55 target.
+   padding grows the hit area, the matching negative margin keeps the text where
+   it was — the extra reach spills into the overlay's own 20px inset. */
+.mobile-menu-top button { font-size: 14px; padding: 11px 12px; margin: -11px -12px; }
+.mobile-menu-links { display: flex; flex-direction: column; gap: 8px; margin-top: 60px; }
+.mobile-menu-links a { font-size: 40px; line-height: 1.2; letter-spacing: -0.04em; }
+
+/* ---------- footer ---------- */
+.site-footer { background: var(--paper); position: relative; z-index: 2; }
+.footer-info {
+  display: flex; justify-content: space-between; gap: 20px;
+  padding: 100px 28px 40px;
+}
+.footer-label { font-size: 14px; letter-spacing: -0.02em; color: var(--ink-faint); margin-bottom: 14px; }
+.footer-tagline { font-size: 32px; line-height: 1.2; letter-spacing: -0.04em; max-width: 560px; }
+.footer-cols { display: flex; gap: 20px; min-width: 47%; }
+.footer-col { display: flex; flex-direction: column; flex: 1; }
+.footer-col a {
+  font-size: 16px; line-height: 1.1; letter-spacing: -0.02em;
+  padding: 10px 0; transition: color .25s var(--ease-io);
+}
+.footer-col a:hover { color: var(--ink-dim); }
+.footer-logo { display: flex; justify-content: center; padding: 40px; }
+
+/* ---------- cart drawer ---------- */
+.cart-scrim {
+  position: fixed; inset: 0; z-index: 70; background: rgba(0, 0, 0, .25);
+  opacity: 0; transition: opacity .4s var(--ease-io);
+}
+.cart-scrim.open { opacity: 1; }
+.cart-scrim[hidden] { display: none; }
+.cart-drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 71;
+  width: 500px; max-width: 100vw; background: var(--paper); padding: 20px;
+  display: flex; flex-direction: column;
+  transform: translateX(102%); transition: transform .5s var(--ease-out);
+}
+.cart-drawer.open { transform: translateX(0); }
+.cart-drawer[hidden] { display: none; }
+.cart-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.cart-title { font-size: 18px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
+.cart-badge { font-size: 12px; background: var(--card-hover); border-radius: 100px; padding: 2px 7px; }
+.cart-close { padding: 4px; }
+.cart-items { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; }
+.cart-item { display: flex; gap: 14px; align-items: flex-start; }
+.cart-item-thumb { width: 64px; height: 64px; border-radius: 10px; background: var(--card); overflow: hidden; flex-shrink: 0; }
+.cart-item-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.cart-item-mid { flex: 1; }
+.cart-item-name { font-size: 15px; }
+.cart-item-size { font-size: 13px; color: var(--ink-dim); }
+.cart-item-qty { display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; }
+.cart-item-qty button { background: var(--card-hover); border-radius: 8px; width: 34px; height: 30px; display: grid; place-items: center; }
+.cart-item-qty span { min-width: 34px; text-align: center; font-size: 14px; }
+.cart-item-price { font-size: 15px; white-space: nowrap; }
+.cart-item-remove { background: var(--card-hover); border-radius: 8px; padding: 6px; margin-left: 6px; }
+.cart-empty { color: var(--ink-dim); font-size: 14px; padding: 30px 0; text-align: center; }
+.cart-foot { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 16px; }
+.cart-subtotal { display: flex; justify-content: space-between; font-size: 17px; margin-bottom: 14px; }
+.cart-checkout {
+  width: 100%; padding: 14px; border-radius: 12px; background: var(--card-hover); color: var(--ink-dim);
+  font-size: 16px; transition: background .3s, color .3s;
+}
+.cart-checkout:not(:disabled) { background: var(--ink); color: var(--ink-contrast); }
+
+/* generic */
+.rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
+.grid-empty { font-size: 13px; letter-spacing: 0; text-transform: uppercase; text-align: center; color: var(--ink); padding: 60px 20px 120px; }
+
+/* тумблер темы в шапке */
+.nav-theme { font-size: 14px; line-height: 1.1; letter-spacing: -0.02em; transition: color .25s var(--ease-io); }
+.nav-theme:hover { color: #878787; }
+.mobile-menu-theme { margin-top: 24px; font-size: 16px; color: var(--ink-dim); text-align: left; }

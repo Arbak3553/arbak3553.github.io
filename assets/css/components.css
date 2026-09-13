@@ -1,0 +1,169 @@
+/* Aurum clone - shared components: cards, section blocks, forms. */
+
+/* ---------- section head (label + link) ---------- */
+.section-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 0 28px; margin-bottom: 26px;
+}
+.section-link {
+  font-size: 14px; letter-spacing: -0.02em; text-decoration: underline;
+  text-underline-offset: 3px; transition: color .25s var(--ease-io);
+}
+.section-link:hover { color: var(--ink-dim); }
+
+/* ---------- product card ---------- */
+.product-card {
+  position: relative; display: flex; flex-direction: column;
+  background: var(--card); border-radius: var(--radius-card); overflow: hidden;
+  width: 375px; height: 473px; flex-shrink: 0;
+}
+.card-media { position: absolute; inset: 0; }
+.card-media img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .6s var(--ease-out);
+}
+.product-card:hover .card-media img { transform: scale(1.05); }
+.card-fav {
+  position: absolute; top: 18px; right: 18px; z-index: 3;
+  color: #b8b8b8; padding: 6px; transition: color .25s var(--ease-io), transform .25s var(--ease-io);
+}
+.card-fav:hover { color: var(--ink); transform: scale(1.1); }
+.card-fav.active { color: var(--ink); }
+.card-fav.active svg { fill: currentColor; }
+.card-meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px 20px; z-index: 2; }
+.card-model .card-meta { color: #fff; }
+.card-name { font-size: 16px; line-height: 1.6; }
+.card-price { font-size: 16px; line-height: 1.6; color: var(--ink-dim); }
+.card-model .card-price { color: rgba(255, 255, 255, .8); }
+
+/* grid variant: fluid cards */
+.product-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 0 20px;
+}
+.product-grid .product-card { width: auto; height: auto; aspect-ratio: 375 / 473; }
+
+/* ---------- slideshow ---------- */
+.slideshow { position: relative; overflow: hidden; }
+.slideshow-track {
+  display: flex; gap: 20px; padding: 0 25px; will-change: transform;
+}
+.slideshow-nav {
+  display: flex; gap: 8px; justify-content: flex-end; padding: 12px 28px 0;
+}
+.slide-btn {
+  width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--pill-line);
+  display: grid; place-items: center; color: var(--ink-faint);
+  transition: color .25s, border-color .25s;
+}
+.slide-btn:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ---------- collections trio ---------- */
+.collections-trio { padding: 0; }
+.trio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 0 20px; }
+.collection-card {
+  position: relative; border-radius: var(--radius-card); overflow: hidden; aspect-ratio: 507 / 480;
+}
+.collection-card img {
+  width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease-out);
+}
+.collection-card:hover img { transform: scale(1.05); }
+.collection-name {
+  position: absolute; left: 0; right: 0; bottom: 24px; text-align: center;
+  font-size: 40px; line-height: 1.1; letter-spacing: -0.04em; color: #fff;
+}
+
+/* ---------- quote ---------- */
+.quote-block { text-align: center; padding: 140px 40px; background: var(--paper); }
+.quote-text { font-size: 32px; line-height: 1.1; letter-spacing: -0.04em; }
+.quote-source { font-size: 14px; color: var(--ink-dim); margin-top: 12px; }
+
+/* ---------- reveal paragraph ---------- */
+.reveal-block { padding: 140px 28px 220px; background: var(--paper); }
+.reveal-text {
+  font-size: 32px; line-height: 1.1; letter-spacing: -0.04em; max-width: 1000px; font-weight: 400;
+}
+.reveal-text .w { display: inline-block; opacity: .18; filter: blur(6px); transform: translateY(10px); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal-text .w { opacity: 1; filter: none; transform: none; }
+}
+
+/* ---------- instagram ---------- */
+.instagram { padding: 140px 20px 40px; }
+.ig-label { text-align: center; margin-bottom: 20px; }
+.ig-tagline {
+  text-align: center; font-size: 32px; line-height: 1.1;
+  letter-spacing: -0.04em; margin-top: 60px; padding: 40px 0;
+}
+.ig-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.ig-tile { border-radius: 14px; overflow: hidden; aspect-ratio: 1; }
+.ig-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease-out); }
+.ig-tile:hover img { transform: scale(1.06); }
+.ig-handle { text-align: center; font-size: 24px; letter-spacing: -0.04em; margin-top: 20px; }
+
+/* ---------- tagline ---------- */
+.tagline { text-align: center; padding: 40px 20px; }
+.tagline h3 { font-size: 32px; line-height: 1.15; letter-spacing: -0.04em; }
+
+/* ---------- newsletter ---------- */
+.newsletter { padding: 20px; }
+.newsletter-media {
+  position: relative; border-radius: var(--radius-card); overflow: hidden; height: 624px;
+}
+.newsletter-media > img { width: 100%; height: 100%; object-fit: cover; }
+.newsletter-content {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 18px; color: #fff; text-align: center;
+}
+.newsletter-text h2 { font-size: 32px; line-height: 1.1; letter-spacing: -0.04em; }
+.newsletter-text p { font-size: 12px; line-height: 1.35; margin-top: 12px; }
+.newsletter-form {
+  display: flex; align-items: center; width: 280px;
+  border-bottom: 1px solid rgba(255, 255, 255, .7);
+}
+.newsletter-form input {
+  flex: 1; background: none; border: 0; outline: none; color: #fff;
+  font-size: 14px; padding: 8px 0;
+}
+.newsletter-form input::placeholder { color: rgba(255, 255, 255, .85); }
+.newsletter-form button { color: #fff; padding: 6px; }
+.newsletter-done { font-size: 14px; }
+
+/* ---------- accordions (faq + product) ---------- */
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-q {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; text-align: left; padding: 22px 0; font-size: 24px;
+  line-height: 1.1; letter-spacing: -0.04em;
+}
+.faq-icon { position: relative; width: 20px; height: 20px; flex-shrink: 0; }
+.faq-icon::before, .faq-icon::after {
+  content: ''; position: absolute; background: var(--ink); inset: 0; margin: auto;
+  transition: transform .4s var(--ease-io);
+}
+.faq-icon::before { width: 16px; height: 1.5px; }
+.faq-icon::after { width: 1.5px; height: 16px; }
+.faq-item.open .faq-icon::after { transform: rotate(90deg); }
+.faq-a {
+  overflow: hidden; max-height: 0; transition: max-height .5s var(--ease-out);
+}
+.faq-a p { color: var(--ink-dim); font-size: 16px; line-height: 1.7; padding-bottom: 24px; max-width: 500px; }
+
+/* ---------- page head ---------- */
+.page-head { padding: calc(var(--nav-h) + 120px) 28px 60px; }
+.page-kicker { color: var(--ink-dim); margin-bottom: 2px; }
+.page-title { letter-spacing: -0.04em; line-height: 1.1; max-width: 760px; }
+.page-title-page, .page-title-lg { font-size: 64px; }
+.page-title-md { font-size: 40px; }
+
+/* ---------- blog cards ---------- */
+.blog-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 20px; padding: 0 20px; }
+.blog-card { display: flex; flex-direction: column; }
+.blog-media { position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 1; }
+.blog-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease-out); }
+.blog-card:hover .blog-media img { transform: scale(1.05); }
+.blog-tag {
+  position: absolute; left: 16px; bottom: 14px; color: #fff;
+  font-size: 12px; font-weight: 500; letter-spacing: 0; text-transform: uppercase;
+}
+.blog-title { font-size: 24px; line-height: 1.15; letter-spacing: -0.04em; margin-top: 16px; }
+.blog-date { font-size: 12px; color: var(--ink-dim); margin-top: 8px; letter-spacing: 0; }

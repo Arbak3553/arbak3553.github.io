@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Конструктор | REL'EF</title>
+<meta name="description" content="Соберите украшение из рельефа своего места: карта, форма, размер.">
+<script>
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js?id=111388101","ym");
+ym(111388101,"init",{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+window.relefGoal=function(n){try{ym(111388101,"reachGoal",n)}catch(e){console.warn("metrika",e)}};
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111388101" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<script>window.RELEF_ORDER_ENDPOINT="https://relef-orders.order-worker.workers.dev";</script>
+<script>try{if(localStorage.getItem('relefTheme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script>
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/pages.css">
+<link rel="stylesheet" href="/assets/css/relef.css">
+<link rel="stylesheet" href="/assets/css/constructor.css">
+<link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<!-- REL'EF: «R» из Yomy кривыми, тем же шрифтом, что и вордмарк. Aurum
+     остаётся на текстовой Georgia. Кривые, а не <text>, потому что Yomy у
+     зрителя не установлен и текстовый фавикон отрисовался бы чем попало. -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 820 820'><path transform='translate(100 57)' d='M246 475C281 631 392 706 521 706C552 706 584 702 617 693L619 571L617 569C592 575 567 579 544 579C469 579 406 545 379 462C528 448 601 353 601 231C601 99 513 0 340 0H0V699H140V619C140 537 182 494 246 475ZM340 130C419 130 457 173 456 233C455 292 415 335 340 335C243 335 178 358 140 410V130Z'/></svg>">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body data-page="constructor" data-brand="relef">
+
+<header class="site-nav" data-appear="nav">
+  <div class="nav-inner">
+    <nav class="nav-left" aria-label="Primary">
+      <a href="/shop/">Магазин</a>
+      
+      <a href="/constructor/">Конструктор</a>
+      <a href="/blog/">Журнал</a>
+      <a href="/about/">О бренде</a>
+    </nav>
+    <button class="nav-burger" data-menu-open aria-label="Меню">Меню</button>
+    <a class="nav-logo" href="/" aria-label="REL'EF"><svg class="wordmark wordmark-small" viewBox="0 0 3189 706" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="REL'EF"><path d="M246 475C281 631 392 706 521 706C552 706 584 702 617 693L619 571L617 569C592 575 567 579 544 579C469 579 406 545 379 462C528 448 601 353 601 231C601 99 513 0 340 0H0V699H140V619C140 537 182 494 246 475ZM340 130C419 130 457 173 456 233C455 292 415 335 340 335C243 335 178 358 140 410V130ZM1231 569H824V566C824 450 938 411 1053 411H1174V288H1051C946 288 868 315 824 376V130H1221V0H684V699H1231ZM1828 569H1437V0H1297V699H1828ZM2586 569H2179V566C2179 450 2293 411 2408 411H2529V288H2406C2301 288 2223 315 2179 376V130H2576V0H2039V699H2586ZM3021 417H3142V288H3019C2914 288 2836 315 2792 376V130H3189V0H2652V699H2792V572C2792 455 2907 417 3021 417ZM1851 210L1911 210L1951 0L1811 0Z"/></svg></a>
+    <div class="nav-right">
+      <button class="nav-theme" data-theme-toggle aria-label="Переключить тему" title="Тема сайта">Тёмная</button>
+      
+      <button class="nav-cart" data-cart-open aria-label="Корзина" title="Корзина"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z" /><path d="M9 11v-5a3 3 0 0 1 6 0v5" /></svg><span class="cart-count" data-cart-count>0</span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" data-mobile-menu hidden>
+  <div class="mobile-menu-top">
+    <button data-menu-close aria-label="Закрыть">Закрыть</button>
+  </div>
+  <nav class="mobile-menu-links">
+    <a href="/shop/">Магазин</a>
+    
+    <a href="/constructor/">Конструктор</a>
+    <a href="/blog/">Журнал</a>
+    <a href="/about/">О бренде</a>
+    <a href="/faqs/">Вопросы и ответы</a>
+    
+  </nav>
+  <button class="mobile-menu-theme" data-theme-toggle>Тёмная</button>
+</div>
+<main>
+<div class="ctor-app">
+  
+<div class="ctor-stage" id="ctor-stage">
+  <div class="ctor-canvas" id="ctor-canvas"></div>
+  <div class="ctor-prodinfo">
+    <div class="ctor-prodname" id="ctor-prodname"></div>
+    <div class="ctor-place" id="ctor-place"></div>
+    <!-- ctor-material is mobile-only: there the full spec line above is hidden,
+         so the metal would otherwise never be stated. Single metal by design. -->
+    <div class="ctor-prodprice"><span class="ctor-material">Серебро 925 &middot; </span><span class="ctor-gramslabel">Расчётный вес: </span><span id="ctor-grams">&mdash;</span></div>
+  </div>
+  <div class="ctor-stagebtns">
+    <button class="ctor-stl" id="ctor-stl" hidden title="Файл для ювелира: точная геометрия в миллиметрах">STL</button>
+    <button class="ctor-share" id="ctor-share">Поделиться</button>
+  </div>
+  <div class="ctor-toast" id="ctor-toast">Ссылка скопирована</div>
+  <div class="ctor-roads-status" id="ctor-roads-status" hidden></div>
+</div>
+  
+<div class="ctor-panel">
+  <button class="ctor-grab" id="ctor-grab" type="button" aria-label="Свернуть или развернуть панель"><span></span></button>
+  <!-- Mobile-only: progress, step number and title are hoisted out of the slide
+       and off the render into one header, so where you are stays put while the
+       slides move under it. JS fills it; the in-slide label is hidden here. -->
+  <div class="ctor-sheethead">
+    <div class="ctor-dots" id="ctor-dots" aria-hidden="true"></div>
+    <!-- no "шаг 2 / 5": the bars above already say it -->
+    <div class="ctor-sheetstep"><span class="ctor-steptitle" id="ctor-steptitle"></span></div>
+  </div>
+  <div class="ctor-stepbody">
+    
+<section data-step="1" class="on">
+  <div class="ctor-seclabel">Форма</div>
+  <div class="ctor-formrow" id="ctor-formsw">
+    <button class="ctor-formcard" data-v="disc">
+      <img src="/assets/img/relef/ctor-disc.jpg" alt="Кольцо-диск">
+      <span class="fc-text"><b>Диск</b><i>Монета с рельефом на тонкой шинке</i></span>
+    </button>
+    <button class="ctor-formcard" data-v="signet">
+      <img src="/assets/img/relef/ctor-signet.jpg" alt="Печатка">
+      <span class="fc-text"><b>Печатка</b><i>Рельеф от края до края, цельный свип</i></span>
+    </button>
+    <button class="ctor-formcard" data-v="earrings">
+      <img src="/assets/img/relef/ctor-earrings.jpg" alt="Серьги">
+      <span class="fc-text"><b>Серьги</b><i>Пара дисков с рельефом, зеркальный разворот</i></span>
+    </button>
+    <button class="ctor-formcard" data-v="pendant">
+      <img src="/assets/img/relef/ctor-pendant.jpg" alt="Подвеска">
+      <span class="fc-text"><b>Подвеска</b><i>Медальон с рельефом на цепочке</i></span>
+    </button>
+  </div>
+</section>
+    
+<section data-step="2">
+  <div class="ctor-seclabel">Размер изделия</div>
+  <div class="ctor-pills" id="ctor-weightsw">
+    <button class="ctor-pill" data-v="subtle">S</button>
+    <button class="ctor-pill" data-v="classic">M</button>
+    <button class="ctor-pill" data-v="statement">L</button>
+  </div>
+  <p class="ctor-dims" id="ctor-dims"></p>
+  <div id="ctor-closurewrap" hidden>
+    <div class="ctor-seclabel">Закрепка</div>
+    <div class="ctor-pills" id="ctor-closuresw">
+      <button class="ctor-pill" data-v="stud">Пусеты</button>
+      <button class="ctor-pill" data-v="leverback">Английский замок</button>
+      <button class="ctor-pill" data-v="hook">Крючки</button>
+    </div>
+  </div>
+  <div id="ctor-mountwrap" hidden>
+    <div class="ctor-seclabel">Закрепка</div>
+    <div class="ctor-pills" id="ctor-mountsw">
+      <button class="ctor-pill" data-v="two">Два ушка</button>
+      <button class="ctor-pill" data-v="one">Одно ушко</button>
+    </div>
+    <p class="ctor-hint">Два ушка — медальон вшит в цепь и всегда смотрит вперёд. Одно ушко — классический бейл, подвеска скользит по цепи.</p>
+  </div>
+  <div id="ctor-surfacewrap">
+    <div class="ctor-seclabel">Поверхность</div>
+    <div class="ctor-pills" id="ctor-surfacesw">
+      <button class="ctor-pill sel" data-v="terrain">Рельеф</button>
+      <button class="ctor-pill" data-v="city">Город</button>
+      <button class="ctor-pill" data-v="roads">Дороги</button>
+    </div>
+    <p class="ctor-hint" id="ctor-city-hint" hidden>Город режется в металл по воде, дорогам и застройке: река — глубокой лентой, улицы — врезами своей ширины, дома — объёмами с этажностью. Масштабы: 8-12 км — кольца и река, 3-4 км — кварталы, до 2 км — отдельные дома. <span id="ctor-buildhint"></span></p>
+  </div>
+  <div class="ctor-seclabel">Отделка</div>
+  <div class="ctor-pills" id="ctor-finishsw">
+    <button class="ctor-pill sel" data-v="gloss">Глянец</button>
+    <button class="ctor-pill" data-v="satin">Сатин</button>
+  </div>
+</section>
+    
+<section data-step="3">
+  <div class="ctor-seclabel">Место</div>
+  <div class="ctor-searchwrap" id="ctor-searchwrap">
+    <input class="ctor-search" id="ctor-search" type="text" placeholder="Найти место..." autocomplete="off">
+    <div class="ctor-sugg" id="ctor-sugg"></div>
+  </div>
+  <div class="ctor-chips" id="ctor-presets"></div>
+  <div class="ctor-maprow">
+    <canvas class="ctor-map" id="ctor-map" width="720" height="560"></canvas>
+    <div class="ctor-mapmode" id="ctor-mapmode">
+      <button class="sel" data-m="terrain">Рельеф</button>
+      <button data-m="hypso">Высоты</button>
+      <button data-m="streets">Карта</button>
+    </div>
+    <div class="ctor-mapzoom">
+      <button id="ctor-zin" aria-label="Приблизить">+</button>
+      <button id="ctor-zout" aria-label="Отдалить">&minus;</button>
+      <button id="ctor-compass" title="Сбросить поворот" aria-label="Сбросить поворот"><svg class="ctor-cneedle" data-ctor-needle width="18" height="18" viewBox="0 0 18 18"><polygon points="9,1 12,9 6,9" fill="#E24C4B"/><polygon points="9,17 12,9 6,9" fill="#9CA3AF"/></svg></button>
+    </div>
+    <div class="ctor-maprotate">
+      <button id="ctor-rotl" title="Повернуть влево" aria-label="Повернуть влево"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4.5 8.5 A6.5 6.5 0 1 1 4 12.5"/><path d="M4.5 4.5v4h4"/></svg></button>
+      <button id="ctor-rotr" title="Повернуть вправо" aria-label="Повернуть вправо"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15.5 8.5 A6.5 6.5 0 1 0 16 12.5"/><path d="M15.5 4.5v4h-4"/></svg></button>
+    </div>
+    <div class="ctor-scalebar" data-ctor-scalebar>1 км</div>
+    <div class="ctor-mapattr">&copy; CARTO &copy; OpenStreetMap &middot; Рельеф: AWS</div>
+  </div>
+  <div class="ctor-bearing-row">
+    <span>Поворот: <b id="ctor-bearing-val">0&deg;</b></span>
+    <input type="range" class="ctor-relief" id="ctor-bearing" min="0" max="360" value="0" aria-label="Поворот рамки">
+  </div>
+  <p class="ctor-hint">Двигайте карту — рельеф в рамке обновляется на кольце сразу. <span class="ctor-hint-mouse">Колесо — масштаб, поворот — слайдером или правой кнопкой мыши.</span><span class="ctor-hint-touch">Щипок двумя пальцами — масштаб, поворот — слайдером.</span></p>
+</section>
+    
+<section data-step="4">
+  <div class="ctor-seclabel">Рельеф</div>
+  <div class="ctor-trow"><b>Высота рельефа</b><b><span id="ctor-hmm">3.0</span> мм</b></div>
+  <input type="range" class="ctor-relief" id="ctor-relief" min="0" max="100" step="1" value="50">
+  <div class="ctor-dlabel">Детализация</div>
+  <div class="ctor-pills" id="ctor-detailsw">
+    <button class="ctor-pill" data-v="low">Низкая</button>
+    <button class="ctor-pill" data-v="medium">Средняя</button>
+    <button class="ctor-pill" data-v="high">Высокая</button>
+  </div>
+  <div id="ctor-basewrap">
+    <div class="ctor-trow" style="margin-top:26px"><b>Уровень поля</b><b id="ctor-base-val">35%</b></div>
+    <input type="range" class="ctor-relief" id="ctor-base" min="0" max="70" step="1" value="35">
+    <p class="ctor-hint">Вода и равнина ниже уровня становятся полированным полем — рельеф растёт из него.</p>
+  </div>
+</section>
+    
+<section data-step="5" id="ctor-sec-shoulder">
+  <div class="ctor-seclabel">Плечи</div>
+  <div class="ctor-cards" id="ctor-shouldersw">
+    <button class="ctor-card" data-v="straight">
+      <svg viewBox="0 0 76 56"><path d="M22 6 H54 L60 50 H16 Z"/></svg>
+      <span class="cl">Прямые</span></button>
+    <button class="ctor-card" data-v="classic">
+      <svg viewBox="0 0 76 56"><path d="M14 6 H62 C56 20 48 24 47 34 L46 50 H30 L29 34 C28 24 20 20 14 6 Z"/></svg>
+      <span class="cl">Классика</span></button>
+    <button class="ctor-card" data-v="curved">
+      <svg viewBox="0 0 76 56"><path d="M18 6 H58 C52 22 50 30 50 50 H26 C26 30 24 22 18 6 Z"/></svg>
+      <span class="cl">Плавные</span></button>
+  </div>
+</section>
+    
+<section data-step="6" id="ctor-sec-band">
+  <div class="ctor-seclabel">Шинка</div>
+  <div class="ctor-cards" id="ctor-bandsw">
+    <button class="ctor-card" data-v="flat">
+      <svg viewBox="0 0 76 56"><path d="M8 18 H68 L64 22 C58 38 52 42 38 42 C24 42 18 38 12 22 Z"/></svg>
+      <span class="cl">Плоский</span></button>
+    <button class="ctor-card" data-v="classic">
+      <svg viewBox="0 0 76 56"><path d="M8 38 L10 26 C14 16 24 12 38 12 C52 12 62 16 66 26 L68 38 Z"/></svg>
+      <span class="cl">Классика</span></button>
+    <button class="ctor-card" data-v="d-shaped">
+      <svg viewBox="0 0 76 56"><path d="M8 40 C10 22 22 12 38 12 C54 12 66 22 68 40 Z"/></svg>
+      <span class="cl">D-профиль</span></button>
+  </div>
+</section>
+    
+<section data-step="7">
+  <div class="ctor-seclabel">Гравировка</div>
+  <div class="ctor-pills" id="ctor-engravesw">
+    <button class="ctor-pill" data-v="coords">Координаты</button>
+    <button class="ctor-pill" data-v="custom">Своя надпись</button>
+    <button class="ctor-pill" data-v="none">Без</button>
+  </div>
+  <input class="ctor-search" id="ctor-engravetext" maxlength="40" placeholder="До 40 знаков" style="display:none; margin-top:14px">
+  <p class="ctor-hint" id="ctor-engrave-preview"></p>
+  <p class="ctor-hint">Координаты места фиксируют точку на земле — даже если однажды забудутся названия, кольцо помнит, где это было.</p>
+</section>
+    
+<section data-step="8" id="ctor-sec-size">
+  <div id="ctor-sizewrap">
+    <div class="ctor-seclabel">Размер</div>
+    <div class="ctor-flabel">Внутренний диаметр, мм</div>
+    <select class="ctor-select" id="ctor-size"></select>
+    <div class="ctor-sizeinfo">
+      <div>Окружность: <b><span id="ctor-circ">&mdash;</span> мм</b></div>
+      <div id="ctor-sizeeq">&mdash;</div>
+    </div>
+    <details class="ctor-sizehelp">
+      <summary>Как узнать свой размер?</summary>
+      <div class="ctor-sizehelp-body">
+        <p>Российский размер кольца — это внутренний диаметр в миллиметрах: размер 17 = 17 мм.</p>
+        <p><b>Способ 1 — по кольцу, которое подходит.</b> Приложите его к линейке и измерьте внутренний диаметр в самом широком месте, край до края.</p>
+        <p><b>Способ 2 — по пальцу.</b> Оберните полоску бумаги или нитку вокруг основания пальца без натяга, отметьте место стыка и измерьте длину — это окружность. Разделите её на 3,14 или найдите в таблице:</p>
+        <table class="ctor-sizetable">
+          <tr><th>Окружность, мм</th><td>47</td><td>50</td><td>53,5</td><td>56,5</td><td>60</td><td>63</td><td>66</td><td>69</td></tr>
+          <tr><th>Размер (RU)</th><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td></tr>
+        </table>
+        <p>Меряйте вечером — к концу дня пальцы чуть шире. Если костяшка заметно шире основания, снимите обе мерки и возьмите среднее. Сомневаетесь между двумя размерами — берите больший: у нас бесплатный ресайз 30 дней.</p>
+      </div>
+    </details>
+  </div>
+  <div id="ctor-chainwrap" hidden>
+    <div class="ctor-seclabel">Цепь</div>
+    <div class="ctor-flabel">Длина цепи, см</div>
+    <select class="ctor-select" id="ctor-chain">
+      <option value="40">40 — под горло</option>
+      <option value="45">45 — классика</option>
+      <option value="50">50 — ниже ключиц</option>
+      <option value="55">55 — свободная</option>
+    </select>
+    <p class="ctor-hint">Цепь якорного плетения, серебро 925 — готовая, крепится к литым ушкам медальона при сборке. Сам медальон отливается по вашему рельефу; его диаметр задаёт вес модели в блоке «Модель».</p>
+  </div>
+</section>
+    
+<!-- no .ctor-seclabel here: the checkout titles itself, so the sheet header
+     takes its name from data-title instead of coming up empty -->
+<section data-step="9" id="ctor-sec-order" data-title="Предзаказ" hidden>
+  <form id="ctor-orderform" hidden>
+    <div class="ctor-h2">Предзаказ</div>
+    <div class="ctor-shots">
+      <img id="ctor-shot-form" src="/assets/img/relef/p-elbrus-disc.jpg" alt="Изделие из серебра с рельефом места">
+      <img src="/assets/img/relef/l-box.jpg" alt="Коробка с картой места">
+    </div>
+    <p class="ctor-shots-note">Придёт в крафтовой коробке с картой вашего места.</p>
+    <div class="ctor-ordersum" id="ctor-ordersum"></div>
+    <div class="os-total"><span>Серебро 925, работа и бесплатная доставка по России</span><b id="ctor-total">&mdash;</b></div>
+    <p class="ctor-body">Готовим первую отливку. Оставьте заявку — зафиксируем цену и место в
+      очереди и напишем, когда изделие будет готово уйти в производство. Оплата — только на том
+      шаге; сейчас платить ничего не нужно.</p>
+    <div class="ctor-flabel">Имя</div>
+    <input class="ctor-search" name="name" autocomplete="name">
+    <div class="ctor-flabel">Как связаться</div>
+    <div class="ctor-radio-row">
+      <label><input type="radio" name="channel" value="tg" checked> Telegram</label>
+      <label><input type="radio" name="channel" value="phone"> Телефон</label>
+    </div>
+    <input class="ctor-search" name="contact" required placeholder="@username или +7...">
+    <input class="ctor-trap" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <label class="ctor-consent">
+      <input type="checkbox" name="consent" required>
+      <span>Согласен на обработку персональных данных — имени, контакта и координат
+        выбранного места — для оформления и исполнения заказа.
+        <a href="/privacy-policy/" target="_blank" rel="noopener">Политика конфиденциальности</a>.</span>
+    </label>
+    <button class="ctor-orderbtn-main" type="submit" data-via="api">Оставить предзаказ</button>
+    
+    <button class="ctor-orderback" id="ctor-orderback" type="button">&larr; Назад к дизайну</button>
+  </form>
+  <div id="ctor-orderdone" class="ctor-orderdone" hidden>
+    <div class="ctor-h2">Заявка принята</div>
+    <p class="ctor-body" id="ctor-done-api" hidden>Дизайн и цена зафиксированы. Ответим в течение
+      дня; платить пока ничего не нужно.</p>
+    <p class="ctor-body" id="ctor-done-local" hidden>Проверьте, что письмо ушло — без него заявка
+      до нас не доедет. Если почтовый клиент не открылся:</p>
+    <button class="ctor-orderbtn-main alt" id="ctor-copyorder" type="button" hidden>Скопировать текст заявки</button>
+    <p class="ctor-hint" id="ctor-done-hint" hidden>…и отправьте его на order@rel-ef.ru любым удобным способом.</p>
+  </div>
+</section>
+  </div>
+  <div class="ctor-stepfoot">
+    <div class="ctor-footrow" id="ctor-footrow">
+      <button class="ctor-backbtn" id="ctor-prevbtn" type="button">Назад</button>
+      <button class="ctor-nextbtn wide" id="ctor-orderbtn">Предзаказ</button>
+      <button class="ctor-morebtn" id="ctor-nextbtn" type="button">Далее</button>
+    </div>
+  </div>
+</div>
+</div>
+</main>
+<script type="importmap">{ "imports": { "three": "/assets/js/three.module.min.js" } }</script>
+<link rel="modulepreload" href="/assets/js/three.module.min.js">
+<link rel="modulepreload" href="/assets/js/relef-ctor/disc.js">
+<link rel="modulepreload" href="/assets/js/relef-ctor/build-worker.js">
+<link rel="preload" href="/assets/hdr/room-light-1k.hdr" as="fetch" crossorigin>
+<script type="module" src="/assets/js/relef-ctor/main.js"></script>
+
+<div class="cart-scrim" data-cart-scrim hidden></div>
+<aside class="cart-drawer" data-cart-drawer aria-label="Корзина" hidden>
+  <div class="cart-head">
+    <p class="cart-title">Корзина <span class="cart-badge" data-cart-count>0</span></p>
+    <button class="cart-close" data-cart-close aria-label="Закрыть"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg></button>
+  </div>
+  <div class="cart-items" data-cart-items></div>
+  <p class="cart-empty" data-cart-empty>Корзина пуста.</p>
+  <div class="cart-foot">
+    <div class="cart-subtotal"><span>Итого</span><span data-cart-subtotal>0</span></div>
+    <button class="cart-checkout" data-cart-checkout disabled>Оформить заказ</button>
+  </div>
+</aside>
+<script src="/assets/js/store.js"></script>
+<script src="/assets/js/effects.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

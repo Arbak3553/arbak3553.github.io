@@ -1,0 +1,408 @@
+/* Aurum clone - page layouts + responsive. */
+
+/* ---------- home hero ---------- */
+.hero-wordmark {
+  position: fixed; top: 116px; left: 50%; z-index: 41;   /* above the solid bar */
+  transform: translateX(-50%);
+  transform-origin: top center;
+  will-change: transform;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+/* on the home page this wordmark IS the header logo once it has shrunk, so it
+   switches to ink the same moment the bar turns solid */
+body.nav-solid .hero-wordmark { mix-blend-mode: normal; }
+body.nav-solid .hero-wordmark .wordmark,
+body.nav-solid .hero-wordmark .wordmark text { color: var(--ink); fill: var(--ink); }
+.hero-wordmark .wordmark text { fill: #fff; }
+.wordmark-hero { width: 473px; height: 170px; }
+/* Куда приезжает уменьшающийся вордмарк. Один источник правды: эти же значения
+   читает effects.js, и на них же построены кейфреймы ниже. Значения Aurum сняты
+   с оригинала; REL'EF переопределяет их в relef.css под свою пропорцию знака. */
+body { --wm-shift: 112; --wm-scale: 0.4; }
+
+/* Scroll-driven анимация героя (animation-timeline: scroll()): зум фото и
+   стыковка вордмарка идут на композиторе и не зависят ни от главного потока,
+   ни от частоты событий scroll. Числа те же, что в JS-пути effects.js
+   (он остаётся фолбэком для браузеров без поддержки и её же гейтом:
+   CSS.supports здесь и там обязаны совпадать). Эндпоинты — через переменные,
+   потому что @keyframes один, а значения меняют и брейкпоинт (ниже), и бренд
+   (relef.css переопределяет --wm-scale / --wm-shift под пропорцию знака).
+   Проверено глазами в видимой вкладке: в фоновой ScrollTimeline не тикает,
+   там замороженный прогресс — артефакт стенда, а не сломанный код. */
+body {
+  --hero-from: .8917; --hero-to: 1.1;
+  --hero-range: 0px 420px; --wm-range: 420px 800px;
+}
+/* Сам @supports-блок живёт НИЖЕ appear-правил: при равной специфичности он
+   обязан идти в файле позже body.loaded .hero-image (heroRise), иначе тот
+   затрёт список анимаций и зум пропадёт. */
+.hero { position: relative; z-index: 2; }
+.hero-spacer { height: 420px; }
+.hero-image-frame { height: 1000px; padding: 20px; position: relative; z-index: 2; }
+.hero-image {
+  width: 100%; height: 100%; border-radius: var(--radius-hero); overflow: hidden;
+  transform: scale(.8917); will-change: transform;
+}
+.hero-image img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- brands ---------- */
+.brands { padding: 100px 20px 140px; }
+.brands-inner { text-align: center; }
+.brands-row {
+  display: flex; justify-content: center; align-items: baseline; gap: 100px; margin-top: 40px;
+}
+.brand-logo { font-family: 'Bodoni Moda', Georgia, serif; color: var(--ink); white-space: nowrap; }
+.brand-0 { font-size: 44px; font-weight: 500; letter-spacing: .04em; }
+.brand-1 { font-size: 46px; font-weight: 700; letter-spacing: .02em; }
+.brand-2 { font-size: 46px; font-weight: 600; letter-spacing: .01em; }
+.brand-3 { font-size: 46px; font-weight: 800; letter-spacing: -.01em; transform: scaleX(.82); }
+
+/* ---------- bestsellers ---------- */
+.bestsellers { padding: 0 0 0; }
+.bestsellers .section-head { margin-bottom: 26px; }
+
+/* ---------- editorial (home) ---------- */
+.editorial { padding: 0 20px 50px; }
+.editorial-row { display: flex; gap: 20px; align-items: flex-start; }
+.editorial-photo { position: relative; border-radius: var(--radius-card); overflow: hidden; }
+.editorial-photo img { width: 100%; height: 100%; object-fit: cover; }
+.editorial-photo-lg { width: 61.5%; aspect-ratio: 980 / 950; }
+.editorial-row-2 .editorial-photo-lg { aspect-ratio: 980 / 900; }
+.editorial-caption {
+  position: absolute; left: 20px; bottom: 18px; color: #fff;
+  font-size: 24px; letter-spacing: -0.04em; line-height: 1.1;
+}
+.editorial-side { flex: 1; display: flex; justify-content: center; padding-top: 130px; }
+.editorial-side .product-card { width: min(100%, 330px); height: auto; aspect-ratio: 330 / 440; }
+.editorial-row-2 { margin-top: 0; }
+.editorial-side-low { padding-top: 250px; justify-content: flex-start; padding-left: 115px; }
+.editorial-row-2 .editorial-photo-lg { margin-left: auto; }
+
+/* ---------- explore card ---------- */
+.explore { padding: 20px; }
+.explore-card {
+  position: relative; display: block; height: 800px;
+  border-radius: var(--radius-card); overflow: hidden;
+}
+.explore-card > img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease-out); }
+.explore-card:hover > img { transform: scale(1.03); }
+.explore-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, .2); }
+.explore-content {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 30px;
+  display: flex; align-items: flex-end; justify-content: space-between; color: #fff;
+}
+.explore-content h2 { font-size: 40px; line-height: 1.1; letter-spacing: -0.04em; }
+.explore-link { font-size: 16px; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- banner hero (about/contact) ----------
+   Banners start at the very top of the page, under the blended header. */
+.banner-hero { padding: 0 20px; }
+.banner-media { position: relative; border-radius: 0 0 var(--radius-card) var(--radius-card); overflow: hidden; height: 600px; }
+.banner-hero-short .banner-media { height: 400px; }
+.banner-media img { width: 100%; height: 100%; object-fit: cover; }
+.banner-dark img { filter: brightness(.62); }
+.banner-title {
+  position: absolute; left: 20px; bottom: 6px; font-size: 96px;
+  letter-spacing: -0.04em; line-height: 1.1; color: #565656;
+  mix-blend-mode: luminosity;
+}
+.banner-title-light { color: #cfcfcf; mix-blend-mode: normal; }
+
+/* ---------- split sections (about) ---------- */
+.split { display: flex; gap: 20px; padding: 0 20px; align-items: flex-start; }
+.split-media { width: 49.35%; border-radius: var(--radius-card); overflow: hidden; aspect-ratio: 770 / 700; flex-shrink: 0; }
+.split-media img { width: 100%; height: 100%; object-fit: cover; }
+.split-text { flex: 1; padding: 0 90px 0 20px; }
+.split-text p { font-size: 18px; line-height: 1.6; max-width: 660px; }
+.split .dim { color: var(--ink-faint); }
+.split-rev .split-media { order: 2; aspect-ratio: 770 / 800; }
+.split-rev .split-text { padding: 0 20px 0 20px; }
+
+/* ---------- contact ---------- */
+.contact-info {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  padding: 40px 240px 100px 270px;
+}
+.contact-col { min-width: 0; }
+.contact-col a, .contact-col p:not(.label-sm) { font-size: 18px; }
+.contact-col .label-sm { margin-bottom: 8px; }
+
+/* ---------- faq page ---------- */
+.faq-wrap { max-width: 1000px; padding: calc(var(--nav-h) + 120px) 20px 120px; margin: 0 auto 0 130px; }
+.faq-wrap .page-title { margin-bottom: 90px; }
+.faq-group { margin-bottom: 70px; max-width: 700px; }
+.faq-group-label { margin-bottom: 10px; }
+
+/* ---------- category / search / favorites ---------- */
+.category-wrap { padding: calc(var(--nav-h) + 110px) 0 60px; }
+body[data-page="collections"] .quote-block { padding: 250px 20px 130px; }
+.search-wrap .product-grid { grid-template-columns: repeat(3, 1fr); }
+.grid-filters {
+  display: flex; justify-content: center; gap: 24px; margin-bottom: 44px;
+  font-size: 15px; letter-spacing: -0.02em;
+}
+.grid-filters a { color: var(--ink-faint); transition: color .25s var(--ease-io); }
+.grid-filters a:hover, .grid-filters a.active { color: var(--ink); }
+.search-wrap { padding: calc(var(--nav-h) + 60px) 0 60px; }
+.search-bar {
+  display: flex; align-items: center; gap: 10px; width: 600px; max-width: calc(100vw - 40px);
+  margin: 0 auto 70px; background: var(--card); border-radius: 12px; padding: 12px 18px;
+  color: var(--ink-dim);
+}
+.search-bar input { flex: 1; border: 0; outline: none; background: none; font-size: 15px; }
+.favorites-wrap { padding-bottom: 40px; }
+
+/* ---------- product page ---------- */
+.product-layout {
+  display: grid; grid-template-columns: 1fr 1fr; padding-top: var(--nav-h);
+}
+.product-gallery {
+  display: flex; flex-direction: column; gap: 34px; padding: 60px 2px 0 180px;
+}
+.gallery-item { border-radius: var(--radius-card); overflow: hidden; background: var(--card); aspect-ratio: 1; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+.product-panel { position: relative; }
+.panel-sticky { position: sticky; top: 0; padding: 140px 40px 60px 20px; max-width: 640px; }
+.panel-cat { font-size: 13px; }
+.panel-title-row { display: flex; align-items: flex-start; justify-content: space-between; }
+.panel-title-row h1 { font-size: 32px; letter-spacing: -0.04em; line-height: 1.1; margin-top: 6px; }
+.panel-fav { position: static; }
+.panel-price { font-size: 20px; margin: 18px 0 26px; }
+.panel-desc p { color: var(--ink-dim); font-size: 15px; line-height: 1.55; margin-bottom: 16px; max-width: 480px; }
+.panel-sizes { margin: 26px 0 8px; }
+.panel-size-label { font-size: 15px; margin-bottom: 10px; }
+.size-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.size-pill {
+  min-width: 38px; height: 34px; padding: 0 10px; border-radius: 10px;
+  background: var(--card-hover); font-size: 13px; transition: background .25s, color .25s;
+}
+.size-pill.active { background: var(--ink); color: var(--ink-contrast); }
+.panel-qty { display: flex; justify-content: flex-end; margin: 18px 0 12px; }
+.qty-stepper { display: flex; align-items: center; gap: 6px; }
+.qty-stepper button { background: var(--card-hover); border-radius: 10px; width: 40px; height: 34px; display: grid; place-items: center; }
+.qty-stepper span { min-width: 40px; text-align: center; font-size: 15px; }
+.add-to-cart {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--ink); color: var(--ink-contrast); border-radius: 12px; padding: 15px;
+  font-size: 16px; transition: opacity .25s;
+}
+.add-to-cart:hover { opacity: .85; }
+.panel-accordions { margin-top: 46px; }
+.panel-accordions .faq-q { font-size: 16px; letter-spacing: -0.02em; padding: 18px 0; }
+.featured-row { padding: 90px 0 0; }
+.featured-row .product-grid { grid-template-columns: repeat(4, 1fr); }
+
+/* ---------- blog ---------- */
+.blog-grid-wrap { padding-bottom: 40px; }
+.blog-grid-wrap .blog-grid { row-gap: 60px; }
+.post-hero { padding: var(--nav-h) 20px 0; }
+.post-hero-media { position: relative; border-radius: var(--radius-card); overflow: hidden; height: 460px; }
+.post-hero-media img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.75); }
+.post-hero-content { position: absolute; left: 480px; right: 60px; bottom: 60px; color: #fff; }
+.post-meta { font-size: 12px; font-weight: 500; letter-spacing: 0; display: flex; gap: 14px; margin-bottom: 18px; }
+.post-hero-content h1 { font-size: 46px; line-height: 1; letter-spacing: -0.04em; font-weight: 500; max-width: 560px; }
+.post-body { max-width: 600px; margin: 0 auto; padding: 100px 20px 60px; margin-left: 500px; }
+.post-body p { color: var(--ink-dim); font-size: 16px; line-height: 1.7; margin-bottom: 26px; }
+.post-h { font-size: 28px; letter-spacing: -0.04em; line-height: 1.1; margin: 44px 0 26px; color: var(--ink); }
+.more-articles { padding: 60px 0 0; }
+
+/* per-page tuning */
+body[data-page="about"] .reveal-text { font-size: 40px; max-width: 1340px; }
+body[data-page="about"] .reveal-block { padding: 114px 28px; }
+body[data-page="about"] .quote-block { padding: 170px 20px; }
+body[data-page="favorites"] .grid-empty { padding: 30px 20px 470px; }
+
+/* ---------- legal ---------- */
+.legal-wrap { max-width: 900px; margin-left: 130px; padding: calc(var(--nav-h) + 100px) 20px 100px; }
+.legal-title { margin-bottom: 40px; }
+.legal-section h2 { font-size: 32px; letter-spacing: -0.04em; line-height: 1.1; margin: 44px 0 18px; }
+.legal-section p { color: var(--ink-dim); font-size: 16px; line-height: 1.7; margin-bottom: 16px; }
+
+/* ---------- 404 ---------- */
+.nf-wrap { padding: var(--nav-h) 20px 0; }
+.nf-media { position: relative; border-radius: var(--radius-card); overflow: hidden; height: 700px; }
+.nf-media img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.6); }
+.nf-content {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px; color: #fff;
+}
+.nf-content h1 { font-size: 64px; letter-spacing: -0.04em; }
+.nf-content p { font-size: 15px; }
+.nf-btn { margin-top: 16px; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- appear animations ---------- */
+[data-appear-group] .ap, .ap { opacity: 0; transform: translateY(40px); }
+.ap.ap-in { opacity: 1; transform: none; transition: opacity .9s var(--ease-soft), transform .9s var(--ease-soft); }
+.site-nav .nav-inner { opacity: 0; transform: translateY(-40px); }
+body.loaded .site-nav .nav-inner {
+  opacity: 1; transform: none;
+  transition: opacity .4s var(--ease-io) .3s, transform .4s var(--ease-io) .3s;
+}
+.hero-wordmark .wordmark-hero { opacity: 0; }
+body.loaded .hero-wordmark .wordmark-hero { opacity: 1; transition: opacity 1s var(--ease-soft) .2s; }
+.hero-image { opacity: 0.001; }
+body.loaded .hero-image {
+  opacity: 1;
+  animation: heroRise 1s var(--ease-out) both;
+}
+@keyframes heroRise { from { translate: 0 140px; } to { translate: 0 0; } }
+
+/* Scroll-driven путь героя (см. комментарий в hero-секции). Идёт после
+   appear-правил сознательно — переопределяет body.loaded .hero-image. */
+@supports (animation-timeline: scroll()) and (animation-range: 0px 420px) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-image {
+      animation: hero-zoom linear both;
+      animation-timeline: scroll(root);
+      animation-range: var(--hero-range);
+    }
+    /* у героя две анимации: heroRise живёт на времени, зум — на скролле;
+       без объединения в один список одно правило затирало бы другое */
+    body.loaded .hero-image {
+      animation: heroRise 1s var(--ease-out) both, hero-zoom linear both;
+      animation-timeline: auto, scroll(root);
+      animation-range: normal, var(--hero-range);
+    }
+    .hero-wordmark {
+      animation: wm-dock linear both;
+      animation-timeline: scroll(root);
+      animation-range: var(--wm-range);
+    }
+  }
+}
+@keyframes hero-zoom {
+  from { transform: scale(var(--hero-from)); }
+  to { transform: scale(var(--hero-to)); }
+}
+@keyframes wm-dock {
+  from { transform: translateX(-50%); }
+  to {
+    transform: translateX(-50%)
+               translateY(calc(var(--wm-shift) * -1px))
+               scale(var(--wm-scale));
+  }
+}
+
+/* ---------- responsive: tablet ---------- */
+/* 810–1023: десктопная раскладка страниц уже включена (в т.ч. конструктор),
+   но четыре ссылки nav-left физически не умещаются рядом с центрированным
+   вордмарком — прячем их за бургер, как на мобиле */
+@media (min-width: 810px) and (max-width: 1023.98px) {
+  .nav-left { display: none; }
+  .nav-burger { display: block; }
+}
+@media (max-width: 1199.98px) {
+  .product-grid, .featured-row .product-grid { grid-template-columns: repeat(3, 1fr); }
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+  .product-gallery { padding-left: 40px; }
+  .post-hero-content { left: 60px; }
+  .post-body { margin-left: auto; }
+  .legal-wrap, .faq-wrap { margin-left: auto; margin-right: auto; }
+  .footer-tagline { font-size: 26px; }
+}
+
+/* ---------- responsive: phone ---------- */
+@media (max-width: 809.98px) {
+  :root { --nav-h: 65px; }
+  .nav-inner { padding: 20px 28px; }
+  .nav-left, .nav-fav-link { display: none; }
+  .nav-burger { display: block; }
+  .nav-right { gap: 14px; }
+  /* both were only as tall as their glyphs (15px / 18px) — under the 44px thumb
+     target. nav-inner centres them, so vertical padding grows the hit area
+     symmetrically and moves nothing on screen. */
+  .nav-burger { padding-block: 14px; }
+  .nav-cart { padding-block: 13px; }
+  .wordmark-small { width: 110px; height: 40px; }
+
+  .hero-wordmark { top: 120px; }
+  body {
+    --wm-shift: 106; --wm-scale: 0.5;
+    --hero-from: .9; --hero-to: 1.08;
+    --hero-range: 0px 300px; --wm-range: 240px 480px;
+  }
+  .wordmark-hero { width: 195px; height: 70px; }
+  .hero-spacer { height: 300px; }
+  .hero-image-frame { height: 500px; padding: 0 20px; }
+  .hero-image { border-radius: 24px; }
+
+  .brands { padding: 40px 20px 100px; }
+  .brands-row { flex-wrap: wrap; gap: 24px 36px; margin-top: 30px; }
+  .brand-logo { font-size: 26px !important; }
+
+  .section-head { padding: 0 20px; }
+  .product-card { width: 300px; height: 440px; }
+  .product-grid, .featured-row .product-grid, .blog-grid { grid-template-columns: 1fr; }
+  .search-wrap .product-grid { grid-template-columns: repeat(2, 1fr); }
+  .trio-grid { grid-template-columns: 1fr; gap: 12px; }
+  .collection-card { aspect-ratio: 350 / 392; }
+
+  .reveal-block, body[data-page="about"] .reveal-block { padding: 140px 20px; }
+  .reveal-text, body[data-page="about"] .reveal-text { font-size: 28px; }
+  .quote-block, body[data-page="collections"] .quote-block,
+  body[data-page="about"] .quote-block { padding: 140px 12px; }
+  .quote-text { font-size: 24px; }
+
+  .editorial { padding: 0; }
+  .editorial-row { flex-direction: column; }
+  .editorial-photo-lg, .editorial-row-2 .editorial-photo-lg {
+    width: 100%; aspect-ratio: auto; height: 480px; border-radius: 0;
+  }
+  .editorial-side, .editorial-side-low { padding: 40px 0; justify-content: center; margin: 0 auto; }
+  .editorial-side .product-card { width: 280px; height: 354px; }
+  .editorial-row-2 .editorial-photo-lg { order: -1; }
+
+  .explore { padding: 0; }
+  .explore-card { height: 600px; border-radius: 0; }
+  .explore-content { flex-direction: column; align-items: flex-start; gap: 14px; padding: 30px; }
+  .explore-content h2 { font-size: 30px; }
+
+  .instagram { padding: 140px 16px 40px; }
+  .ig-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .ig-tile { flex: 0 0 72vw; scroll-snap-align: center; }
+
+  .newsletter { padding: 16px; }
+  .newsletter-media { height: 541px; }
+  .footer-info { flex-direction: column; gap: 50px; padding: 100px 20px 40px; }
+  .footer-cols { flex-direction: column; gap: 40px; }
+  .footer-logo { padding: 20px; }
+
+  .banner-media { height: 530px; }
+  .banner-title { font-size: 56px; }
+  .split, .split-rev { flex-direction: column; padding: 0 16px; gap: 24px; }
+  .split-media, .split-rev .split-media { width: 100%; aspect-ratio: auto; height: 500px; order: 0; }
+  .split-text, .split-rev .split-text { padding: 20px 0 70px; }
+  body[data-page="about"] .reveal-block { padding: 100px 16px; }
+  .split-rev { padding-bottom: 100px; }
+  .contact-info { grid-template-columns: 1fr; gap: 40px; padding: 40px 20px 100px; }
+
+  .page-head { padding: 200px 20px 50px; }
+  .page-title-page, .page-title-lg { font-size: 44px; }
+  body[data-page="collections"] .quote-block { padding: 240px 12px 140px; }
+  .faq-wrap { padding-top: calc(var(--nav-h) + 100px); }
+  .faq-q { font-size: 20px; }
+
+  .search-wrap .product-grid .product-card { aspect-ratio: 168 / 228; }
+
+  .product-layout { grid-template-columns: 1fr; }
+  .product-gallery {
+    flex-direction: row; padding: 0; gap: 0; height: 490px;
+    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  }
+  .product-gallery::-webkit-scrollbar { display: none; }
+  .product-gallery .gallery-item {
+    flex: 0 0 100%; border-radius: 0; scroll-snap-align: center; aspect-ratio: auto;
+  }
+  .panel-sticky { position: static; padding: 20px 16px 0; }
+  .featured-row { padding-top: 200px; }
+
+  .post-hero { padding: 0 16px 40px; }
+  .post-hero-media { height: 460px; margin-top: 80px; }
+  .post-hero-content { left: 30px; right: 30px; bottom: 36px; }
+  .post-hero-content h1 { font-size: 32px; }
+  .post-body { padding: 60px 16px 40px; }
+  .more-articles { padding-bottom: 100px; }
+
+  .nf-media { height: 580px; }
+}

@@ -1,0 +1,145 @@
+/* REL'EF section: brand overrides on the Aurum design system. */
+
+/* Wordmark sizing. Heights are width / 4.517 — the Yomy mark's own proportion
+   (viewBox 3189x706). Ставить произвольную высоту нельзя: SVG вписывается по
+   preserveAspectRatio и просто повиснет с полями внутри своей коробки, а
+   hero-анимация считает точку приземления от заявленной высоты. */
+body[data-brand="relef"] .wordmark-hero { width: 620px; height: 137px; }
+body[data-brand="relef"] .wordmark-small { width: 130px; height: 29px; }
+/* Куда приезжает уменьшающийся hero-вордмарк (читает effects.js). Aurum'ские
+   0.4/112 сняты с оригинала под ЕГО пропорцию знака и здесь не годятся: с ними
+   Yomy приезжал шириной 248 при 130 на внутренних страницах — на главной шапка
+   выглядела крупнее остального сайта. scale = 130/620, shift подобран так,
+   чтобы уменьшенный знак встал по центру 80-пиксельного бара. */
+body[data-brand="relef"] { --wm-scale: 0.210; --wm-shift: 96; }
+body[data-brand="relef"] .wordmark-footer { width: min(78vw, 1240px); height: auto; }
+body[data-brand="relef"] .hero-wordmark { top: 122px; }
+
+/* place names row mirrors the brand strip in restrained caps */
+body[data-brand="relef"] .brand-logo {
+  font-family: 'Inter', sans-serif; font-weight: 600;
+  font-size: 30px; letter-spacing: .14em;
+}
+
+/* two collection cards instead of three */
+.trio-grid.trio-2 { grid-template-columns: repeat(2, 1fr); }
+.trio-grid.trio-2 .collection-card { aspect-ratio: 770 / 480; }
+
+/* prices and RU strings render slightly longer */
+body[data-brand="relef"] .card-price { letter-spacing: 0; }
+
+/* Ряды editorial в клоне стыкуются впритык (margin-top: 0), и поскольку большие
+   фото ещё и перекрываются по горизонтали, между ними виден шов. Разводим —
+   только у REL'EF, чтобы не трогать пиксельно снятую раскладку Aurum. */
+body[data-brand="relef"] .editorial-row-2 { margin-top: 48px; }
+
+@media (max-width: 809.98px) {
+  body[data-brand="relef"] .wordmark-hero { width: 320px; height: 71px; }
+  body[data-brand="relef"] .wordmark-small { width: 110px; height: 24px; }
+  body[data-brand="relef"] { --wm-scale: 0.344; --wm-shift: 102; }   /* 110/320, центр бара 65 */
+  body[data-brand="relef"] .brand-logo { font-size: 18px !important; letter-spacing: .12em; }
+  .trio-grid.trio-2 { grid-template-columns: 1fr; }
+}
+
+/* ---------- shop: build-your-own form cards ---------- */
+/* the forms block owns the page gutter so it lines up with the places grid
+   below — .category-wrap has no horizontal padding of its own */
+.shop-wrap { padding: calc(var(--nav-h) + 64px) 40px 36px; }
+.shopforms-home { padding: 10px 40px 30px; }
+.shopforms-hero { max-width: 560px; margin: 0 0 26px; }
+.shopforms-hero h1 { font-size: 44px; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 14px; }
+.shopforms-hero p { font-size: 15px; line-height: 1.65; color: var(--ink-dim); }
+.shopforms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+/* these sections carry their own gutter, so the shared .section-head padding
+   would push the heading 28px right of the cards under it */
+.shopforms-home .section-head, .places-wrap .section-head { padding: 0; }
+/* the editorial rows size their card by class, and that card is a place-card
+   now that products are gone — without this it stretches the whole column */
+.editorial-side .place-card { width: min(100%, 330px); }
+.shopform-card {
+  display: block; border-radius: var(--radius-card); background: var(--card);
+  overflow: hidden; transition: transform .35s var(--ease-io);
+}
+.shopform-card:hover { transform: translateY(-4px); }
+.shopform-media { position: relative; aspect-ratio: 1; overflow: hidden; }
+.shopform-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease-io); }
+.shopform-card:hover .shopform-media img { transform: scale(1.03); }
+.shopform-meta { padding: 14px 18px 18px; }
+.shopform-name { font-size: 20px; letter-spacing: -0.03em; }
+.shopform-price { font-size: 14px; margin-top: 3px; }
+.shopform-sub { font-size: 13px; color: var(--ink-dim); margin-top: 5px; line-height: 1.5; }
+.shopform-cta {
+  display: inline-flex; margin-top: 12px; background: var(--ink); color: var(--ink-contrast);
+  padding: 10px 16px; border-radius: 10px; font-size: 14px;
+  transition: opacity .25s var(--ease-io);
+}
+/* hover swaps the packshot for the piece being worn */
+.shopform-media .worn, .place-media .worn {
+  position: absolute; inset: 0; opacity: 0;
+  transition: opacity .45s var(--ease-io);
+}
+.shopform-card:hover .worn, .place-card:hover .worn { opacity: 1; }
+.shopform-card:hover .shopform-cta { opacity: .85; }
+.shopforms-note { margin-top: 30px; font-size: 14px; color: var(--ink-dim); }
+.shopforms-note a { text-decoration: underline; text-underline-offset: 3px; color: var(--ink); }
+@media (max-width: 809.98px) {
+  .shopforms { grid-template-columns: 1fr; }
+  .shopforms-hero h1 { font-size: 34px; }
+}
+
+/* ---------- how it works (5 steps before the price, not after) ---------- */
+.howto { padding: 30px 40px 40px; }
+.howto .section-head { padding: 0; }
+.howto-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; list-style: none; }
+.howto-step { border-top: 1px solid var(--line); padding-top: 14px; }
+.howto-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%; background: var(--ink); color: var(--ink-contrast);
+  font-size: 13px; margin-bottom: 10px;
+}
+.howto-h { font-size: 17px; letter-spacing: -0.03em; line-height: 1.25; }
+.howto-p { font-size: 14px; line-height: 1.55; color: var(--ink-dim); margin-top: 6px; }
+@media (max-width: 1023.98px) { .howto-steps { grid-template-columns: repeat(2, 1fr); row-gap: 22px; } }
+@media (max-width: 809.98px) {
+  .howto { padding: 20px 20px 30px; }
+  .howto-steps { grid-template-columns: 1fr; row-gap: 18px; }
+}
+
+/* ---------- contact ---------- */
+/* Aurum's block is a hard 3-up. REL'EF has one entry today and will have three
+   once Telegram and WhatsApp land, so let the track count follow the content:
+   auto-fit collapses the empty tracks, and the survivors split the row. */
+body[data-brand="relef"] .contact-info { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+/* ---------- shop: places already cast (replaces the old collections grid) ---------- */
+.places-wrap { padding: 0 40px 80px; }
+.places-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.place-card { display: block; }
+.place-media {
+  position: relative; aspect-ratio: 1; border-radius: var(--radius-card);
+  overflow: hidden; background: var(--card);
+}
+.place-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease-io); }
+.place-card:hover .place-media img { transform: scale(1.05); }
+.place-name { margin-top: 10px; font-size: 14px; letter-spacing: -0.02em; }
+/* the ig strip carries its own 140px lead-in (Aurum's original spacing, where the
+   preceding section has no bottom padding). places-wrap does have one, so absorb it
+   here — otherwise the two stack into a 200px white hole on a 390px screen. */
+.places-wrap + .instagram { padding-top: 60px; }
+@media (max-width: 1023.98px) { .places-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 809.98px) {
+  .shop-wrap { padding: calc(var(--nav-h) + 32px) 20px 24px; }
+  .shopforms-home { padding: 6px 20px 20px; }
+  .places-wrap { padding: 0 20px 60px; }
+  .places-wrap + .instagram { padding-top: 80px; }
+  .places-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .editorial-side .place-card { width: 280px; }
+}
+
+/* city block on the home editorial row (city mode promo) */
+.cityblock { max-width: 360px; align-self: center; }
+.cityblock h3 { font-size: 28px; line-height: 1.15; margin: 0 0 14px; }
+.cityblock p { color: var(--ink-soft, #555); line-height: 1.55; margin: 0 0 14px; }
+.cityblock .slide-btn { display: inline-block; margin-top: 4px; }
+.cityblock .slide-btn { white-space: nowrap; }
+.editorial-caption-dark { color: #3a3a36; text-shadow: none; }

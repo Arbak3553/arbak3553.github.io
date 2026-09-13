@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Заявки | REL'EF</title>
+<meta name="description" content="Служебная страница.">
+<meta name="robots" content="noindex, nofollow">
+<script>
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js?id=111388101","ym");
+ym(111388101,"init",{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+window.relefGoal=function(n){try{ym(111388101,"reachGoal",n)}catch(e){console.warn("metrika",e)}};
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/111388101" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<script>window.RELEF_ORDER_ENDPOINT="https://relef-orders.order-worker.workers.dev";</script>
+<script>try{if(localStorage.getItem('relefTheme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script>
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<link rel="stylesheet" href="/assets/css/pages.css">
+<link rel="stylesheet" href="/assets/css/relef.css">
+<link rel="stylesheet" href="/assets/css/constructor.css">
+<link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<!-- REL'EF: «R» из Yomy кривыми, тем же шрифтом, что и вордмарк. Aurum
+     остаётся на текстовой Georgia. Кривые, а не <text>, потому что Yomy у
+     зрителя не установлен и текстовый фавикон отрисовался бы чем попало. -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 820 820'><path transform='translate(100 57)' d='M246 475C281 631 392 706 521 706C552 706 584 702 617 693L619 571L617 569C592 575 567 579 544 579C469 579 406 545 379 462C528 448 601 353 601 231C601 99 513 0 340 0H0V699H140V619C140 537 182 494 246 475ZM340 130C419 130 457 173 456 233C455 292 415 335 340 335C243 335 178 358 140 410V130Z'/></svg>">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body data-page="admin" data-brand="relef">
+<style>
+.adm { max-width: 1180px; margin: 40px auto 120px; padding: 0 20px; }
+.adm h1 { font-size: 28px; margin-bottom: 6px; }
+.adm-sub { color: #777; margin-bottom: 28px; }
+.adm-gate { max-width: 420px; margin: 80px auto; text-align: center; }
+.adm-gate input { width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 10px; margin: 14px 0; font: inherit; }
+.adm-gate button, .adm-refresh { padding: 11px 22px; border: 0; border-radius: 10px; background: #1C1C1C; color: #fff; font: inherit; cursor: pointer; }
+.adm-refresh { padding: 8px 16px; margin-left: 12px; font-size: 14px; }
+.adm-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.adm-table th { text-align: left; font-weight: 600; padding: 10px 10px; border-bottom: 2px solid #1C1C1C; white-space: nowrap; }
+.adm-table td { padding: 12px 10px; border-bottom: 1px solid #e2e2e2; vertical-align: top; }
+.adm-table select { font: inherit; padding: 5px 8px; border-radius: 8px; border: 1px solid #ccc; background: #fff; }
+.adm-num { font-weight: 600; white-space: nowrap; }
+.adm-ts { color: #999; font-size: 12.5px; white-space: nowrap; }
+.adm-price { white-space: nowrap; }
+.adm-a { color: inherit; }
+.adm-details summary { cursor: pointer; color: #555; }
+.adm-details pre { white-space: pre-wrap; font: 12.5px/1.5 ui-monospace, monospace; background: #f6f6f4; padding: 10px 12px; border-radius: 8px; margin-top: 8px; max-width: 420px; }
+.adm-empty { padding: 60px 0; text-align: center; color: #888; }
+.adm-err { color: #b3261e; margin: 14px 0; }
+.st-новая { outline: 2px solid #1C1C1C; }
+@media (max-width: 860px) { .adm-table th:nth-child(2), .adm-table td:nth-child(2) { display: none; } }
+</style>
+<main class="adm">
+  <div id="adm-gate" class="adm-gate" hidden>
+    <h1>Заявки</h1>
+    <p class="adm-sub">Служебная страница. Введите админ-токен.</p>
+    <input id="adm-token" type="password" placeholder="токен" autocomplete="current-password">
+    <button id="adm-enter">Войти</button>
+    <p class="adm-err" id="adm-gate-err" hidden>Неверный токен.</p>
+  </div>
+  <div id="adm-app" hidden>
+    <h1>Заявки <button class="adm-refresh" id="adm-refresh">Обновить</button></h1>
+    <p class="adm-sub" id="adm-count"></p>
+    <p class="adm-err" id="adm-err" hidden></p>
+    <table class="adm-table" id="adm-table" hidden>
+      <thead><tr>
+        <th>№ / когда</th><th>Модель</th><th>Цена</th><th>Клиент</th><th>Статус</th><th>Дизайн</th>
+      </tr></thead>
+      <tbody id="adm-rows"></tbody>
+    </table>
+    <div class="adm-empty" id="adm-empty" hidden>Заявок пока нет.</div>
+  </div>
+</main>
+<script type="module">
+const EP = window.RELEF_ORDER_ENDPOINT;
+const KEY = 'relef.admin';
+const $ = id => document.getElementById(id);
+const FORM_LABEL = { disc: 'Кольцо-диск', signet: 'Печатка', earrings: 'Серьги', pendant: 'Подвеска' };
+const SIZE_LABEL = { subtle: 'S', classic: 'M', statement: 'L' };
+
+function gate(bad) {
+  $('adm-app').hidden = true;
+  $('adm-gate').hidden = false;
+  $('adm-gate-err').hidden = !bad;
+  $('adm-token').focus();
+}
+async function api(path, opts = {}) {
+  const r = await fetch(EP + path, {
+    ...opts,
+    headers: { ...(opts.headers || {}), Authorization: 'Bearer ' + (localStorage.getItem(KEY) || '') },
+  });
+  if (r.status === 401) { gate(true); throw new Error('unauthorized'); }
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+function contactLink(raw) {
+  const c = (raw || '').trim();
+  if (!c) return null;
+  const a = document.createElement('a');
+  a.className = 'adm-a';
+  a.textContent = c;
+  if (c.startsWith('@')) { a.href = 'https://t.me/' + c.slice(1); a.target = '_blank'; a.rel = 'noopener'; }
+  else if (/^[+\d][\d\s()-]{5,}$/.test(c)) a.href = 'tel:' + c.replace(/[^+\d]/g, '');
+  else a.removeAttribute('href');
+  return a;
+}
+function row(o, statuses) {
+  const tr = document.createElement('tr');
+  const cell = () => { const c = document.createElement('td'); tr.appendChild(c); return c; };
+
+  const c1 = cell();
+  const num = document.createElement('div'); num.className = 'adm-num'; num.textContent = o.n; c1.appendChild(num);
+  const ts = document.createElement('div'); ts.className = 'adm-ts';
+  ts.textContent = o.ts ? new Date(o.ts).toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : ''; c1.appendChild(ts);
+
+  const c2 = cell();
+  const model = document.createElement('div');
+  model.textContent = (FORM_LABEL[o.form] || o.form || '?') + ' · ' + (SIZE_LABEL[o.weight] || o.weight || '') + (o.grams ? ' · ' + o.grams + ' г' : '');
+  c2.appendChild(model);
+  if (o.place) { const p = document.createElement('div'); p.className = 'adm-ts'; p.textContent = o.place; c2.appendChild(p); }
+  const det = document.createElement('details'); det.className = 'adm-details';
+  const sum = document.createElement('summary'); sum.textContent = 'наряд + заявка'; det.appendChild(sum);
+  const pre = document.createElement('pre'); pre.textContent = (o.jeweler || '') + '\n\n---\n' + (o.text || ''); det.appendChild(pre);
+  c2.appendChild(det);
+
+  const c3 = cell(); c3.className = 'adm-price';
+  c3.textContent = o.price ? (+o.price).toLocaleString('ru-RU') + ' \u20BD' : '—';
+
+  const c4 = cell();
+  if (o.name) { const n = document.createElement('div'); n.textContent = o.name; c4.appendChild(n); }
+  const cl = contactLink(o.contact); if (cl) c4.appendChild(cl);
+
+  const c5 = cell();
+  const sel = document.createElement('select');
+  for (const s of statuses) {
+    const op = document.createElement('option'); op.value = s; op.textContent = s;
+    if (s === o.status) op.selected = true;
+    sel.appendChild(op);
+  }
+  if (o.status === 'новая') sel.classList.add('st-новая');
+  sel.onchange = async () => {
+    sel.disabled = true;
+    try { await api('/admin/status', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ n: o.n, status: sel.value }) }); sel.classList.remove('st-новая'); }
+    catch (err) { console.warn(err); $('adm-err').textContent = 'Не удалось сменить статус ' + o.n; $('adm-err').hidden = false; }
+    sel.disabled = false;
+  };
+  c5.appendChild(sel);
+
+  const c6 = cell();
+  if (o.hash) {
+    const a = document.createElement('a'); a.className = 'adm-a';
+    a.textContent = 'открыть 3D';
+    a.href = '/constructor/#' + o.hash;
+    a.target = '_blank'; a.rel = 'noopener';
+    const dl = document.createElement('a'); dl.className = 'adm-a';
+    dl.textContent = 'скачать STL';
+    dl.href = '/constructor/?dl=stl#' + o.hash;
+    dl.target = '_blank'; dl.rel = 'noopener';
+    c6.appendChild(a);
+    c6.appendChild(document.createElement('br'));
+    c6.appendChild(dl);
+  } else c6.textContent = '—';
+  return tr;
+}
+async function load() {
+  $('adm-err').hidden = true;
+  const { orders, statuses } = await api('/admin/orders');
+  orders.sort((a, b) => (b.n || '').localeCompare(a.n || ''));
+  $('adm-gate').hidden = true;
+  $('adm-app').hidden = false;
+  // вход в админку делает браузер «своим» для конструктора: dev-защёлка
+  // включает кнопку STL и авто-скачивание по ссылкам ?dl=stl из таблицы
+  localStorage.setItem('relef.dev', '1');
+  $('adm-count').textContent = orders.length
+    ? orders.length + ' заявок · новых: ' + orders.filter(o => o.status === 'новая').length
+    : '';
+  $('adm-table').hidden = orders.length === 0;
+  $('adm-empty').hidden = orders.length !== 0;
+  const tb = $('adm-rows'); tb.replaceChildren();
+  for (const o of orders) tb.appendChild(row(o, statuses));
+}
+$('adm-enter').onclick = () => { localStorage.setItem(KEY, $('adm-token').value.trim()); load().catch(console.warn); };
+$('adm-token').addEventListener('keydown', e => { if (e.key === 'Enter') $('adm-enter').click(); });
+$('adm-refresh').onclick = () => load().catch(console.warn);
+if (!EP) { $('adm-gate').hidden = false; $('adm-gate-err').textContent = 'ORDER_ENDPOINT не настроен.'; $('adm-gate-err').hidden = false; }
+else if (localStorage.getItem(KEY)) load().catch(err => { if (String(err).indexOf('unauthorized') < 0) gate(false); });
+else gate(false);
+</script>
+</body>
+</html>
